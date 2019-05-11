@@ -16,6 +16,6 @@ export class SocketService {
   }
 
   public send(message: string): any {
-    this.socket.emit(message);
+    this.socket.emit('broadcast', message);
   }
 }
