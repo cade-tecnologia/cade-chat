@@ -1,5 +1,5 @@
-import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { SocketService } from './socket.service';
 
 @Component({
   selector: 'app-main',
@@ -8,6 +8,13 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 })
 export class MainComponent implements OnInit {
 
+  public user = 'jefferson';
+
+  constructor(private socketService: SocketService) { }
+
   ngOnInit() { }
 
+  public onTerminal(event: string): void {
+
+  }
 }

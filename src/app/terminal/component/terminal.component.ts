@@ -9,7 +9,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 })
 export class TerminalComponent implements OnInit, AfterViewInit {
 
-  @Input() user: string = 'jefferson';
+  @Input() user = 'jefferson';
   @Output() terminalEvent: EventEmitter<string> = new EventEmitter();
 
   public formulario: FormGroup;
