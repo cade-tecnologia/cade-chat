@@ -60,7 +60,7 @@ export class TerminalComponent implements OnInit, AfterViewInit {
   private newLine(): void {
     const message = `${this.user}$ `;
 
-    setTimeout(() => this.print(message), 10);
+    setTimeout(() => this.print(message), 5);
   }
 
   /**
