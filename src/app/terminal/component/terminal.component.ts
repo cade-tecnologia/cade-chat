@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, Input } from '@angular/core';
+import { Component, OnInit, AfterViewInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
@@ -10,6 +10,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 export class TerminalComponent implements OnInit, AfterViewInit {
 
   @Input() user: string = 'jefferson';
+  @Output() terminalEvent: EventEmitter<string> = new EventEmitter();
 
   public formulario: FormGroup;
 
@@ -22,11 +23,35 @@ export class TerminalComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
   }
 
+  public onEnter(): void {
+    const messageSend = this.message;
+
+    console.log(messageSend);
+
+    if (!messageSend) { return this.newLine(); }
+    if (messageSend === 'clear') { return this.clear(); }
+
+    this.send(messageSend);
+  }
+
   /**
    * Send a message for other users.
    */
-  public send(): void {
+  public send(messageSend: string): void {
 
+    console.log(messageSend);
+    this.terminalEvent.emit(messageSend);
+
+    this.newLine();
+  }
+
+  private get message(): string {
+    const { content } = this.formulario.controls;
+    const contentValue = content.value.split('\n');
+    const message = Object.assign([], contentValue).reverse()[0];
+
+    const messageSanitized = message.split('$ ')[1];
+    return messageSanitized;
   }
 
   /**
@@ -35,16 +60,36 @@ export class TerminalComponent implements OnInit, AfterViewInit {
   private newLine(): void {
     const message = `${this.user}$ `;
 
-    this.print(message);
+    setTimeout(() => this.print(message), 10);
+  }
+
+  /**
+   * Clear terminal
+   */
+  private clear(): void {
+    console.log('clear');
+    setTimeout(() => {
+      this.formulario.controls.content.setValue('');
+      this.newLine();
+    }, 10);
   }
 
   private print(message: string): void {
-    this.formulario.controls.content.setValue(message);
+    const { content } = this.formulario.controls;
+
+    if (!content.value) {
+      content.setValue(message);
+
+      return;
+    }
+
+    const newMessage = content.value + message;
+    content.setValue(newMessage);
   }
 
   private createForm(): void {
     this.formulario = this.fb.group({
-      content: this.fb.control(null, [Validators.required, Validators.minLength(1)]),
+      content: this.fb.control('', [Validators.required, Validators.minLength(1)]),
     });
   }
 }

@@ -1,7 +1,11 @@
 <div fxLayout="column" fxFlexFill class="background-dark">
-  <form [formGroup]="formulario" (ngSubmit)="send()">
+  <form [formGroup]="formulario" novalidate>
 
-    <textarea class="content" fxFlex="100" formControlName="content"></textarea>
+    <textarea
+      class="content"
+      fxFlex="100"
+      formControlName="content"
+      (keydown.enter)="onEnter()"></textarea>
 
   </form>
 </div>
