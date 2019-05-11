@@ -1,13 +1,13 @@
 import SocketIo from 'socket.io';
 import { Socket } from 'socket.io';
-import * as http from "http";
+import * as http from 'http';
 import { MessageEvent } from './message.event';
 
 export class CreateSocket {
   private io: SocketIo.Server;
 
   constructor(io: http.Server) {
-    this.io = SocketIo.listen(io);
+    this.io = SocketIo.listen(io, { path: '/socket' });
     this.mainConnect();
   }
 
