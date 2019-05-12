@@ -8,6 +8,9 @@ import { AppComponent } from './app.component';
 import { MainComponent } from './main/main.component';
 import { PathLocationStrategy, LocationStrategy } from '@angular/common';
 import { TerminalModule } from './terminal/terminal.module';
+import { SocketIoModule } from 'ngx-socket-io';
+import { socketConfig } from './config/socket.config';
+import { SocketService } from './service/socket.service';
 
 @NgModule({
   declarations: [
@@ -20,8 +23,10 @@ import { TerminalModule } from './terminal/terminal.module';
     FlexLayoutModule,
     ReactiveFormsModule,
     TerminalModule,
+    SocketIoModule.forRoot(socketConfig),
   ],
   providers: [
+    SocketService,
     { provide: LocationStrategy, useClass: PathLocationStrategy, },
   ],
   bootstrap: [AppComponent]

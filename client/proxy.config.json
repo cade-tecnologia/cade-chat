@@ -1,6 +1,0 @@
-{
-  "/socket": {
-    "target": "http://localhost:3001/socket",
-    "secure": false
-  }
-}

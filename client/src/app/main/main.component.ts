@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { SocketService } from './socket.service';
+import { SocketService } from '../service/socket.service';
 
 @Component({
   selector: 'app-main',
@@ -10,9 +10,13 @@ export class MainComponent implements OnInit {
 
   public user = 'jefferson';
 
-  constructor(private socketService: SocketService) { }
+  constructor(
+    private socketService: SocketService,
+  ) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.socketService.getMessage();
+  }
 
   public onTerminal(event: string): void {
 
