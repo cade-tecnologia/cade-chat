@@ -7,7 +7,11 @@ export class CreateSocket {
   private io: SocketIo.Server;
 
   constructor(io: http.Server) {
-    this.io = SocketIo.listen(io, { path: '/socket' });
+    console.log('SOCKET', io);
+    this.io = SocketIo.listen(io, {
+      // path: '/socket', -> Antes
+      path: '/socket.io', // -> Agora
+    });
     this.mainConnect();
   }
 
@@ -18,6 +22,7 @@ export class CreateSocket {
    */
   private mainConnect(): void {
     this.io.on('connect', (socket: Socket) => {
+      console.log('New Connection: ', socket.id);
       /**
        * Trying to emmit an event to
        * everybody connect.

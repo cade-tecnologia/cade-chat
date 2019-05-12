@@ -1,5 +1,6 @@
 import 'reflect-metadata';
 import { config } from 'dotenv';
+
 config();
 
 import server from './server';
@@ -8,15 +9,16 @@ import { CreateSocket } from './socket/create-socket.main';
 const port = process.env.PORT;
 
 // @ts-ignore
-const serverCreated = server.express.listen(8080, () => {
+const serverCreated = server.listen(8080, () => {
   console.log('\n----------------------');
-  console.log(`SERVER RUNNING ON\nhttp://localhost:${port}`);
+  console.log(`SERVER RUNNING ON\nhttp://localhost:${ port }`);
   console.log('ENVIRONMENT --> ', process.env.NODE_ENV);
   console.log('----------------------\n');
+
+  new CreateSocket(serverCreated);
 });
 
 /**
  * Creates a new Socket with
  * the server created by express
  */
-new CreateSocket(serverCreated);
