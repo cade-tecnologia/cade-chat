@@ -7,10 +7,8 @@ export class CreateSocket {
   private io: SocketIo.Server;
 
   constructor(io: http.Server) {
-    console.log('SOCKET', io);
     this.io = SocketIo.listen(io, {
-      // path: '/socket', -> Antes
-      path: '/socket.io', // -> Agora
+      path: '/socket.io',
     });
     this.mainConnect();
   }
