@@ -12,4 +12,10 @@ export class SocketService {
       console.log('SOCKET', socket);
     });
   }
+
+  public getUser(): void {
+    return this.socket.on('new-user', (socket: Socket) => {
+      console.log('SOCKET', socket);
+    });
+  }
 }

@@ -8,7 +8,7 @@ import { SocketService } from '../service/socket.service';
 })
 export class MainComponent implements OnInit {
 
-  public user = 'jefferson';
+  public user = '';
 
   constructor(
     private socketService: SocketService,
@@ -16,9 +16,12 @@ export class MainComponent implements OnInit {
 
   ngOnInit() {
     this.socketService.getMessage();
+    this.socketService.getUser();
   }
 
   public onTerminal(event: string): void {
-
+    if (event.includes('user.name')) {
+      console.log(event.slice(10));
+    }
   }
 }

@@ -1,11 +1,10 @@
-<div fxLayout="column" fxLayoutAlign="space-between stretch" fxFlexFill class="background-dark">
-  <form [formGroup]="formulario" novalidate>
-
+<div class="terminal">
+  <label>mateus $</label>
+  <div>
+    <form [formGroup]="formulario" novalidate>
     <textarea
-      class="content"
-      fxFlex="100"
       formControlName="content"
       (keydown.enter)="onEnter()"></textarea>
-
-  </form>
+    </form>
+  </div>
 </div>

@@ -26,7 +26,7 @@ export class CreateSocket {
        * everybody connect.
        * But it's not working with angular
        */
-      socket.broadcast.emit('NOVO USUARIO CONECTADO!');
+      socket.broadcast.emit('new-user', 'MATEUS');
       new MessageEvent(socket);
     })
   }

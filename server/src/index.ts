@@ -15,10 +15,10 @@ const serverCreated = server.listen(8080, () => {
   console.log('ENVIRONMENT --> ', process.env.NODE_ENV);
   console.log('----------------------\n');
 
-  new CreateSocket(serverCreated);
 });
 
 /**
  * Creates a new Socket with
  * the server created by express
  */
+new CreateSocket(serverCreated);

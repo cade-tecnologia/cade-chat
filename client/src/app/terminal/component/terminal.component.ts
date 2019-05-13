@@ -9,7 +9,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 })
 export class TerminalComponent implements OnInit, AfterViewInit {
 
-  @Input() user = 'jefferson';
+  @Input() user;
   @Output() terminalEvent: EventEmitter<string> = new EventEmitter();
 
   public formulario: FormGroup;
@@ -26,8 +26,6 @@ export class TerminalComponent implements OnInit, AfterViewInit {
   public onEnter(): void {
     const messageSend = this.message;
 
-    console.log(messageSend);
-
     if (!messageSend) { return this.newLine(); }
     if (messageSend === 'clear') { return this.clear(); }
 
@@ -39,7 +37,6 @@ export class TerminalComponent implements OnInit, AfterViewInit {
    */
   public send(messageSend: string): void {
 
-    console.log(messageSend);
     this.terminalEvent.emit(messageSend);
 
     this.newLine();
@@ -58,7 +55,7 @@ export class TerminalComponent implements OnInit, AfterViewInit {
    * Print a new line with user
    */
   private newLine(): void {
-    const message = `${this.user}$ `;
+    const message = `${this.user}`;
 
     setTimeout(() => this.print(message), 5);
   }
